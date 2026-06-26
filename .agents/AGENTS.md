@@ -35,7 +35,7 @@ graph TD
 #### ETAPA C: FIM — Construção do Código (Motion Design)
 - **Objetivo:** Traduzir a decupagem em código. Utilizar animações programáticas (GSAP) para dar vida às cenas no DOM (HTML).
 - **Habilidades Relacionadas:**
-  - `@aura-gsap-animator`: Constrói a cena web, orquestrando timelines determinísticas e garantindo loops secundários com GSAP e D3.js.
+  - `@aura-remotion-gsap`: Constrói a cena em React/Remotion, orquestrando timelines determinísticas e garantindo loops secundários com GSAP e D3.js via sincronização de frames (`tl.seek`).
 
 #### ETAPA D: QUALITY ASSURANCE VISUAL (QA)
 - **Objetivo:** Inspecionar e auto-corrigir o código para evitar elementos sobrepostos, cortados ou falhas de animação antes do render final.

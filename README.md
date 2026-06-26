@@ -13,7 +13,7 @@ O framework é coordenado pelos seguintes agentes (definidos em `.agents/skills/
 1. **`aura-motion-planner` (Diretor de Criação):** Quebra o conceito em uma timeline (cenas e tempos).
 2. **`aura-script-writer` (Copywriter):** Escreve a copy da narração e os textos de apoio.
 3. **`aura-visuals` (Diretor de Arte):** Define as cores, ícones e referências de imagens/vetores.
-4. **`aura-gsap-animator` (Motion Designer):** Escreve o código final em HTML e anima as timelines via GSAP e D3.js.
+4. **`aura-remotion-gsap` (Motion Designer):** Escreve o código final envolto em componentes React (Remotion) e orquestra a animação da cena via GSAP (sincronizando o tempo do GSAP com os frames do Remotion).
 5. **`aura-qa-director` (QA Visual):** Inspeciona o código construído caçando quebras de layout, bugs de z-index e textos cortados, arrumando tudo antes do render final.
 
 ## Como Usar
@@ -23,23 +23,24 @@ O fluxo de trabalho funciona melhor com uma IA operadora (como Claude Desktop, C
 1. **Peça uma nova apresentação:** "Crie um vídeo sobre [TEMA] usando o Aura Motion."
 2. **Passe pela Ideaçāo:** O `planner` e o `script-writer` vão gerar um arquivo `video_plan.yml` (ou um artefato similar).
 3. **Revisão:** Aprove o roteiro e os tempos das cenas.
-4. **Build:** O `gsap-animator` gerará as páginas `index.html` com a animação pronta.
+4. **Build:** O `aura-remotion-gsap` gerará as composições React na pasta `/src` do Remotion.
 
 ## Renderização para MP4
 
-Após o agente construir sua página web super animada, utilize uma ferramenta de captura (como `timecut` via Node.js) para transformar a página em vídeo de forma 100% autônoma e sincronizada com a timeline do GSAP:
+Com a fusão tecnológica, a renderização volta a usar o motor ultra-veloz e de alta qualidade do Remotion:
 
 ```bash
-npx timecut index.html --viewport=1920,1080 --fps=30 --duration=10 --output=scene1.mp4
+npm run build
 ```
 
 ## Setup Inicial (Projeto Base)
 
-Para hospedar o código gerado pelo `remotion-builder`, você pode inicializar um repositório Remotion puro:
+Para hospedar o código gerado pelo `aura-remotion-gsap`, você precisa inicializar um repositório Remotion e instalar as bibliotecas matemáticas web:
 
 ```bash
-npx create-video@latest
-# Escolha o template em branco (TypeScript/Tailwind)
+npx create-video@latest meu-projeto
+cd meu-projeto
+npm install gsap d3
 ```
 
 Depois disso, o builder pode escrever diretamente na pasta `src/` as sequências animadas.
