@@ -1,5 +1,7 @@
 # Aura Motion Framework
 
+[![Documentação Oficial](https://img.shields.io/badge/📖_Ver_Documentação-Reversa_Docs-a855f7?style=for-the-badge)](docs/index.html)
+
 Bem-vindo ao **Aura Motion**! Este é um framework desenhado para aproveitar toda a flexibilidade de motores web puros (HTML, GSAP, D3) na criação de motion graphics de alto impacto através de um pipeline automatizado de inteligência artificial.
 
 ## O Que É?

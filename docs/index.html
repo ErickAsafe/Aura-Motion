@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Motion - Documentação Oficial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        aura: {
+                            500: '#a855f7',
+                            600: '#9333ea',
+                            900: '#581c87',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Highlight.js para blocos de código -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <!-- Mermaid para diagramas -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-200 min-h-screen selection:bg-aura-500 selection:text-white">
+    
+    <!-- Navbar -->
+    <nav class="border-b border-gray-800 bg-gray-900/50 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-aura-600 to-pink-500 flex items-center justify-center font-bold text-white shadow-lg shadow-aura-500/20">A</div>
+                <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">Aura Motion</span>
+            </div>
+            <a href="https://github.com/ErickAsafe/Aura-Motion" target="_blank" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">GitHub Repository</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="max-w-4xl mx-auto px-4 py-24 text-center">
+        <h1 class="text-5xl font-extrabold tracking-tight mb-6 text-white">Motion Graphics com <span class="bg-clip-text text-transparent bg-gradient-to-r from-aura-500 to-pink-500">I.A.</span></h1>
+        <p class="text-xl text-gray-400 mb-10 leading-relaxed">
+            O Aura Motion é um framework que une a renderização matemática do <strong class="text-white">Remotion</strong> 
+            com a fluidez infinita do <strong class="text-white">GSAP</strong>. Totalmente orquestrado por agentes autônomos.
+        </p>
+        <div class="flex items-center justify-center gap-4">
+            <a href="#pipeline" class="bg-aura-600 hover:bg-aura-500 text-white px-6 py-3 rounded-full font-medium transition-all shadow-lg shadow-aura-500/20">Ver Pipeline</a>
+            <a href="#truque" class="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-full font-medium transition-all border border-gray-700">Como funciona o GSAP</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 pb-24 space-y-24">
+        
+        <!-- Section: Pipeline -->
+        <section id="pipeline" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                <span class="w-2 h-8 rounded-full bg-aura-500 block"></span>
+                Orquestração de Agentes
+            </h2>
+            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 md:p-8 shadow-xl">
+                <p class="text-gray-400 mb-6">O framework depende de uma esteira de produção linear invisível. Cada etapa passa o bastão (Handoff) perfeitamente para o próximo especialista.</p>
+                
+                <div class="mermaid bg-gray-950 p-4 rounded-xl border border-gray-800 flex justify-center">
+                    graph TD
+                        A[Início: Ideação] -->|Handoff 1| B[Roteiro e Decupagem]
+                        B -->|Handoff 2| C[React/Remotion + GSAP]
+                        C -->|Handoff 3| D[QA Visual Auto-Corrigível]
+                        D -->|Handoff 4| E[Renderização Dupla MP4 + Web]
+                        
+                        style A fill:#1f2937,stroke:#374151,color:#f3f4f6
+                        style B fill:#1f2937,stroke:#374151,color:#f3f4f6
+                        style C fill:#581c87,stroke:#a855f7,color:#ffffff,stroke-width:2px
+                        style D fill:#1f2937,stroke:#374151,color:#f3f4f6
+                        style E fill:#065f46,stroke:#10b981,color:#ffffff
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: O Truque do GSAP -->
+        <section id="truque" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                <span class="w-2 h-8 rounded-full bg-aura-500 block"></span>
+                A Arquitetura Híbrida
+            </h2>
+            <div class="prose prose-invert max-w-none prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-800">
+                <p class="text-lg text-gray-300">
+                    O maior desafio da engenharia de motion em web é que bibliotecas maduras como o GSAP rodam em tempo real (baseado no relógio interno do navegador), mas gravadores profissionais como o Remotion renderizam <em>offline</em> (processam um frame a cada alguns segundos).
+                </p>
+                <p class="text-lg text-gray-300">
+                    A solução do Aura Motion é o <strong>"Truque do Tempo"</strong>. Nós escrevemos o GSAP, mas não deixamos ele rodar. Nós pausamos a timeline e forçamos o seeker a avançar matematicamente lendo a câmera (frame) do Remotion. O código gerado pela IA sempre respeita esse padrão:
+                </p>
+
+<pre><code class="language-typescript">import { useCurrentFrame, useVideoConfig } from 'remotion';
+import { useEffect, useMemo, useRef } from 'react';
+import gsap from 'gsap';
+
+export const CenaHibrida = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const boxRef = useRef(null);
+
+  // 1. O agente constrói a timeline pausada
+  const tl = useMemo(() => {
+    const t = gsap.timeline({ paused: true });
+    t.to(boxRef.current, { x: 500, duration: 2, ease: "power4.out" });
+    return t;
+  }, []);
+
+  // 2. A sincronização mestre do Aura Motion
+  useEffect(() => {
+    tl.seek(frame / fps); // Força o GSAP a sincronizar com a gravação offline
+  }, [frame, fps, tl]);
+
+  return <div ref={boxRef} className="box">Magia acontecendo...</div>;
+};</code></pre>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 bg-gray-900 py-8 text-center text-gray-500">
+        <p>Gerado via Reversa Docs • Aura Motion v2.0</p>
+    </footer>
+
+    <script>
+        // Inicializa bibliotecas
+        mermaid.initialize({ theme: 'dark' });
+        hljs.highlightAll();
+    </script>
+</body>
+</html>
