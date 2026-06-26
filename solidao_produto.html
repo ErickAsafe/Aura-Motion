@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solidão é um Produto - Aura Motion</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #050505;
+      --text-color: #ffffff;
+      --accent: #8b5cf6;
+      --accent2: #ef4444;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.05);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Outfit', sans-serif;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1000px;
+    }
+
+    /* Background Orbs */
+    .orb-container {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      filter: blur(100px);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+    }
+    .orb-1 {
+      width: 40vw; height: 40vw;
+      background: var(--accent);
+      top: -10%; left: -10%;
+    }
+    .orb-2 {
+      width: 50vw; height: 50vw;
+      background: var(--accent2);
+      bottom: -20%; right: -10%;
+    }
+    
+    /* Scene Container */
+    .scene {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      padding: 5vw;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    h1, h2 {
+      text-align: center;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    /* Typographic Styles */
+    .attention {
+      font-size: clamp(1rem, 3vw, 2rem);
+      font-weight: 300;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 2vh;
+    }
+    
+    .statement {
+      font-size: clamp(1.5rem, 5vw, 4rem);
+      font-weight: 500;
+      max-width: 80vw;
+      text-align: center;
+    }
+    
+    .highlight {
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff, #aaa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .highlight-red {
+      color: var(--accent2);
+      text-shadow: 0 0 40px rgba(239, 68, 68, 0.4);
+    }
+    .highlight-purple {
+      color: var(--accent);
+      text-shadow: 0 0 40px rgba(139, 92, 246, 0.4);
+    }
+
+    /* Glass Cards */
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: clamp(20px, 4vw, 60px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      opacity: 0;
+      transform: translateY(50px) scale(0.95);
+      max-width: 90vw;
+    }
+    
+    .product-barcode {
+      width: 100%;
+      height: 60px;
+      display: flex;
+      gap: 4px;
+      margin-top: 2rem;
+      opacity: 0.7;
+      overflow: hidden;
+      flex-wrap: nowrap;
+    }
+    .bar {
+      height: 100%;
+      background: white;
+      border-radius: 2px;
+    }
+
+    .profit-chart {
+      width: 100%;
+      height: 150px;
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      margin-top: 2rem;
+    }
+    .chart-bar {
+      flex: 1;
+      background: linear-gradient(to top, var(--accent), transparent);
+      border-radius: 4px 4px 0 0;
+      height: 0%; /* Animated */
+    }
+
+    .word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(20px);
+      white-space: pre-wrap;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Background -->
+  <div class="orb-container">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
+
+  <!-- Scene 1: Attention -->
+  <div class="scene" id="scene1">
+    <div class="attention split-text">Mas preste muita atenção:</div>
+  </div>
+
+  <!-- Scene 2: The Statement -->
+  <div class="scene" id="scene2">
+    <div class="statement split-text">
+      a sua <span class="highlight-purple word" style="display:inline-block">solidão</span> não é uma falha psicológica sua.
+    </div>
+  </div>
+
+  <!-- Scene 3: The Product -->
+  <div class="scene" id="scene3">
+    <div class="glass-card" id="card3">
+      <div class="statement highlight" style="font-size: clamp(2rem, 6vw, 5rem); font-weight: 900;">Ela é um produto.</div>
+      <div class="statement" style="font-size: clamp(1rem, 3vw, 2rem); margin-top: 1vh; color: #888;">Ela foi desenhada.</div>
+      <div class="product-barcode">
+        <!-- Bars generated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 4: The Profit -->
+  <div class="scene" id="scene4">
+    <div class="glass-card" id="card4" style="width: 100%; max-width: 800px;">
+      <div class="statement" style="font-size: clamp(1.5rem, 3.5vw, 3rem);">E hoje, ela é o modelo de negócio</div>
+      <div class="statement highlight-red" style="font-size: clamp(2.5rem, 6.5vw, 6rem); font-weight: 900; margin-top: 2vh; line-height: 1;">mais lucrativo</div>
+      <div class="statement" style="font-size: clamp(1rem, 3vw, 2rem); margin-top: 1vh; color: #888;">já criado.</div>
+      <div class="profit-chart">
+        <div class="chart-bar"></div>
+        <div class="chart-bar"></div>
+        <div class="chart-bar"></div>
+        <div class="chart-bar"></div>
+        <div class="chart-bar"></div>
+        <div class="chart-bar" style="background: linear-gradient(to top, var(--accent2), transparent);"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Utility for splitting text without a premium plugin
+    // We only split text that doesn't already have special spans, for simplicity
+    document.querySelectorAll('.split-text').forEach(el => {
+      // If it contains inner HTML tags, we skip simple split to avoid breaking spans
+      if(!el.innerHTML.includes('<span')) {
+        const text = el.innerText;
+        el.innerHTML = '';
+        text.split(' ').forEach(word => {
+          const span = document.createElement('span');
+          span.className = 'word';
+          span.innerText = word + ' ';
+          el.appendChild(span);
+        });
+      } else {
+        // Simple manual split for mixed content
+        const children = Array.from(el.childNodes);
+        el.innerHTML = '';
+        children.forEach(node => {
+          if(node.nodeType === 3) { // Text node
+            node.textContent.split(' ').forEach(word => {
+              if(word.trim() !== '') {
+                const span = document.createElement('span');
+                span.className = 'word';
+                span.innerText = word + ' ';
+                el.appendChild(span);
+              }
+            });
+          } else {
+            el.appendChild(node);
+          }
+        });
+      }
+    });
+
+    // Generate random barcode
+    const barcode = document.querySelector('.product-barcode');
+    for(let i=0; i<30; i++) {
+      const bar = document.createElement('div');
+      bar.className = 'bar';
+      bar.style.width = Math.random() * 10 + 2 + 'px';
+      barcode.appendChild(bar);
+    }
+
+    // Ambient orb movement
+    gsap.to('.orb-1', {
+      x: '20vw',
+      y: '10vh',
+      duration: 10,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    });
+    
+    gsap.to('.orb-2', {
+      x: '-20vw',
+      y: '-10vh',
+      duration: 12,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    });
+
+    // Main Timeline
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    // Scene 1: Attention
+    tl.set('#scene1', { autoAlpha: 1 })
+      .to('#scene1 .word', {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'back.out(1.7)'
+      })
+      .to('#scene1', {
+        scale: 1.1,
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.inOut'
+      }, "+=1.5");
+
+    // Scene 2: Loneliness
+    tl.set('#scene1', { autoAlpha: 0 })
+      .set('#scene2', { autoAlpha: 1 })
+      .fromTo('#scene2', { scale: 0.9, filter: 'blur(10px)' }, { scale: 1, filter: 'blur(0px)', duration: 1 })
+      .to('#scene2 .word', {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.05
+      }, "-=0.5")
+      .to('#scene2', {
+        y: '-10vh',
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.inOut'
+      }, "+=2");
+
+    // Scene 3: Product
+    tl.set('#scene2', { autoAlpha: 0 })
+      .set('#scene3', { autoAlpha: 1 })
+      .to('#card3', {
+        y: 0,
+        scale: 1,
+        opacity: 1,
+        duration: 1.2,
+        ease: 'expo.out'
+      })
+      .fromTo('#card3 .statement', 
+        { y: 20, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.8, stagger: 0.2 }, 
+        "-=0.8"
+      )
+      .fromTo('.bar', 
+        { scaleY: 0 }, 
+        { scaleY: 1, duration: 0.5, stagger: 0.02, transformOrigin: 'bottom' }, 
+        "-=0.5"
+      )
+      .to('#card3', {
+        z: 300,
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.in'
+      }, "+=2");
+
+    // Scene 4: Profit
+    tl.set('#scene3', { autoAlpha: 0 })
+      .set('#scene4', { autoAlpha: 1 })
+      .to('#card4', {
+        y: 0,
+        scale: 1,
+        opacity: 1,
+        duration: 1.2,
+        ease: 'expo.out'
+      })
+      .fromTo('#card4 .statement', 
+        { y: 30, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.8, stagger: 0.3 }, 
+        "-=0.8"
+      )
+      .to('.chart-bar', {
+        height: (i) => `${(i+1) * 15}%`,
+        duration: 1,
+        stagger: 0.1,
+        ease: 'back.out(1.5)'
+      }, "-=0.5")
+      // Final specific bar jump for dramatic effect
+      .to('.chart-bar:last-child', {
+        height: '100%',
+        duration: 1.5,
+        ease: 'elastic.out(1, 0.3)'
+      }, "-=0.5")
+      // Subtle continuous float for card 4
+      .to('#card4', {
+        y: -10,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
+
+  </script>
+</body>
+</html>

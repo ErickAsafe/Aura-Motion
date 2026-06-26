@@ -73,10 +73,18 @@ aura-motion/
 ├── .agents/                 # Brain do Sistema
 │   └── skills/              # Prompts e Agentes (reversa, planner, coder)
 ├── _reversa_sdd/            # Conhecimento Arquitetural (SDDs extraídos)
-├── src/                     # Código final web (Vazio no início)
-│   ├── components/          # Elementos isolados (Cards, Títulos)
-│   ├── compositions/        # Cenas inteiras juntadas pela IA
+├── src/                     # Código fonte
+│   ├── motions/             # 📁 Módulos de Animação (Organizados por Nome)
+│   │   ├── intro-x/         # Cada animação ganha sua própria pasta
+│   │   │   ├── index.tsx    # O componente Remotion (GSAP injection)
+│   │   │   └── assets/      # SVGs e imagens isoladas desta animação
+│   │   └── lower-third-y/   # Outra animação isolada
 │   └── index.ts             # Registro central no Remotion
+├── out/                     # 📁 Entregas Renderizadas (Export MP4)
+│   ├── intro-x/             # Pasta da entrega 1
+│   │   └── final.mp4
+│   └── lower-third-y/       # Pasta da entrega 2
+│       └── final.mp4
 └── package.json             # Dependências core (Remotion, GSAP)
 ```
 

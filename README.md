@@ -74,7 +74,7 @@ cd meu-projeto
 npm install gsap d3
 ```
 
-A partir desse momento, chame os Agentes IA e peça para criarem sua primeira cena na pasta `/src`!
+A partir desse momento, chame os Agentes IA e peça para criarem sua primeira cena modulada dentro da pasta `/src/motions/`!
 
 ```bash
 # 4. Inicie o render da inteligência finalizada
