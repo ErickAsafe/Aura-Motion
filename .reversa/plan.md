@@ -18,9 +18,9 @@
 
 ## Fase 2: Escavação 🏗️
 
-> O Reversa preenche esta seção com os módulos reais após o Scout concluir o reconhecimento.
-
-- [ ] **Arqueólogo** — Análise dos módulos identificados pelo Scout
+- [x] **Arqueólogo** — Análise da feature `Documentation`
+- [x] **Arqueólogo** — Análise da feature `AI Agents Pipeline`
+- [x] **Arqueólogo** — Análise da feature `GSAP+Remotion Logic`
 
 ## Fase 3: Interpretação 🧠
 

@@ -1,51 +1,102 @@
-# Aura Motion Framework
+# 🎬 Aura Motion
 
 [![Documentação Oficial](https://img.shields.io/badge/📖_Ver_Documentação-Reversa_Docs-a855f7?style=for-the-badge)](docs/index.html)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Powered by GSAP](https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=white)](#)
+[![Powered by Remotion](https://img.shields.io/badge/Remotion-0B0B0B?style=for-the-badge&logo=remotion&logoColor=white)](#)
 
-Bem-vindo ao **Aura Motion**! Este é um framework desenhado para aproveitar toda a flexibilidade de motores web puros (HTML, GSAP, D3) na criação de motion graphics de alto impacto através de um pipeline automatizado de inteligência artificial.
+> **O Futuro do Motion Graphics Autônomo** <br>
+> Aura Motion é um framework híbrido que une a fluidez extrema das timelines do GSAP com o poder de compilação Frame-a-Frame do React Remotion, governado 100% por uma esteira de Agentes Autônomos de Inteligência Artificial.
 
-## O Que É?
+---
 
-O Aura Motion transforma PDFs, ideias e documentações em animações HTML deslumbrantes que, em seguida, são convertidas programaticamente em arquivos de vídeo reais (`.mp4`). Os agentes colaboram para extrair roteiros, definir animações e programar a renderização visual.
+## 📑 Sumário
 
-## Pipeline de Agentes
+- [Visão Geral](#-visão-geral)
+- [A Arquitetura Híbrida (Time Trick)](#-a-arquitetura-híbrida)
+- [Pipeline de Agentes Autônomos](#-pipeline-de-agentes-autônomos)
+- [Guia Rápido de Instalação](#-guia-rápido-de-instalação)
+- [Documentação Detalhada](#-documentação-detalhada)
+- [Como Contribuir](#-como-contribuir)
 
-O framework é coordenado pelos seguintes agentes (definidos em `.agents/skills/`):
+---
 
-1. **`aura-motion-planner` (Diretor de Criação):** Quebra o conceito em uma timeline (cenas e tempos).
-2. **`aura-script-writer` (Copywriter):** Escreve a copy da narração e os textos de apoio.
-3. **`aura-visuals` (Diretor de Arte):** Define as cores, ícones e referências de imagens/vetores.
-4. **`aura-remotion-gsap` (Motion Designer):** Escreve o código final envolto em componentes React (Remotion) e orquestra a animação da cena via GSAP (sincronizando o tempo do GSAP com os frames do Remotion).
-5. **`aura-qa-director` (QA Visual):** Inspeciona o código construído caçando quebras de layout, bugs de z-index e textos cortados, arrumando tudo antes do render final.
+## 👁️ Visão Geral
 
-## Como Usar
+O Aura Motion foi criado para substituir métodos lentos e pesados de geração de vídeo. Em vez de abrir o Adobe After Effects ou lutar com Puppeteer, o Aura Motion utiliza IAs locais para desenhar um roteiro, orquestrar os tempos, construir componentes React e animá-los usando a alta performance do **GSAP (GreenSock Animation Platform)**, renderizando para `.mp4` impecáveis usando o **Remotion**.
 
-O fluxo de trabalho funciona melhor com uma IA operadora (como Claude Desktop, Claude Code ou Antigravity):
+---
 
-1. **Peça uma nova apresentação:** "Crie um vídeo sobre [TEMA] usando o Aura Motion."
-2. **Passe pela Ideaçāo:** O `planner` e o `script-writer` vão gerar um arquivo `video_plan.yml` (ou um artefato similar).
-3. **Revisão:** Aprove o roteiro e os tempos das cenas.
-4. **Build:** O `aura-remotion-gsap` gerará as composições React na pasta `/src` do Remotion.
+## ⚙️ A Arquitetura Híbrida
 
-## Renderização para MP4
+Renderizar animações web (GSAP) em formato MP4 costumava causar quadros perdidos (dropped frames). O Aura Motion resolve isso paralisando a timeline nativa da web e forçando o progresso atrelado a um relógio estrito do React.
 
-Com a fusão tecnológica, a renderização volta a usar o motor ultra-veloz e de alta qualidade do Remotion:
+```javascript
+// O "Time Trick" do Aura Motion
+const frame = useCurrentFrame();
+const { fps } = useVideoConfig();
 
-```bash
-npm run build
+useEffect(() => {
+  // O GSAP avança apenas quando o Remotion permite
+  timeline.seek(frame / fps); 
+}, [frame, fps, timeline]);
 ```
+Para mergulhar fundo nas entranhas visuais e de design desse sistema, consulte nosso [Documento de Arquitetura (ARCHITECTURE.md)](ARCHITECTURE.md).
 
-## Setup Inicial (Projeto Base)
+---
 
-Para hospedar o código gerado pelo `aura-remotion-gsap`, você precisa inicializar um repositório Remotion e instalar as bibliotecas matemáticas web:
+## 🤖 Pipeline de Agentes Autônomos
+
+O trabalho não é feito por você, é feito por uma agência de IA virtual contida na pasta `.agents/skills/`.
+
+- 🧠 **Planner:** Divide o conceito criativo em blocos de tempo lógicos.
+- ✍️ **Script Writer:** Desenvolve a narração e as copys visuais.
+- 🎨 **Visuals:** Estabelece a paleta Glassmorphism e diretrizes de UI.
+- 🧑‍💻 **GSAP Coder:** Escreve as lógicas do React (`useCurrentFrame`) e animações (`tl.to`).
+- 🕵️ **QA Director:** Inspeciona anomalias no DOM e z-index antes de renderizar.
+
+O handoff entre os agentes é feito **exclusivamente via JSON**, garantindo integridade de parse no último robô gerador. Leia mais no [Manifesto do Pipeline (AGENTS_PIPELINE.md)](AGENTS_PIPELINE.md).
+
+---
+
+## 🚀 Guia Rápido de Instalação
+
+Para testar a infraestrutura base onde nossos robôs injetarão o código, inicialize o ambiente Remotion:
 
 ```bash
+# 1. Crie o núcleo do Remotion
 npx create-video@latest meu-projeto
+
+# 2. Acesse a pasta
 cd meu-projeto
+
+# 3. Instale as bibliotecas matemáticas web core
 npm install gsap d3
 ```
 
-Depois disso, o builder pode escrever diretamente na pasta `src/` as sequências animadas.
+A partir desse momento, chame os Agentes IA e peça para criarem sua primeira cena na pasta `/src`!
+
+```bash
+# 4. Inicie o render da inteligência finalizada
+npm run build
+```
 
 ---
-*Desenvolvido em colaboração iterativa usando a regra global de AGENTS.*
+
+## 📚 Documentação Detalhada
+
+Para facilitar o onboarding de times técnicos, o repositório foi escavado via **Reversa Framework** (ver pasta `_reversa_sdd/`). Abaixo, os principais guias gerados:
+
+*   [**Arquitetura e Fluxos (ARCHITECTURE.md)**](ARCHITECTURE.md)
+*   [**Especificação dos Agentes (AGENTS_PIPELINE.md)**](AGENTS_PIPELINE.md)
+*   [**Portal Docs Visual**](docs/index.html)
+
+---
+
+## 🤝 Como Contribuir
+
+Quer criar um novo Agente? Descobriu um bug no `Time Trick` do GSAP?
+Leia nosso [Guia de Contribuição (.github/CONTRIBUTING.md)](.github/CONTRIBUTING.md) para entender como escrever novas *Skills* para o nosso time virtual.
+
+---
+*Built with ❤️ and Autonomous AI Agents.*

@@ -1,0 +1,73 @@
+{
+  "generated_at": "2026-06-26T04:02:00Z",
+  "modules": [
+    {
+      "name": "Documentation",
+      "path": "docs",
+      "purpose": "Apresentação e portal técnico do projeto",
+      "primary_files": [
+        "docs/index.html",
+        "README.md"
+      ],
+      "functions": [],
+      "entities": [],
+      "business_rules": [],
+      "dependencies": [],
+      "algorithms": [],
+      "complexity": "low"
+    },
+    {
+      "name": "AI Agents Pipeline",
+      "path": ".agents",
+      "purpose": "Orquestração dos agentes autônomos",
+      "primary_files": [
+        "AGENTS.md",
+        ".agents/skills/aura-qa-director/SKILL.md",
+        ".agents/skills/aura-remotion-gsap/SKILL.md"
+      ],
+      "functions": [],
+      "entities": [],
+      "business_rules": [
+        {
+          "description": "Todo Handoff deve passar pelo YAML obrigatório de contexto.",
+          "location": "AGENTS.md",
+          "confidence": "inferred"
+        }
+      ],
+      "dependencies": [],
+      "algorithms": [],
+      "complexity": "medium"
+    },
+    {
+      "name": "GSAP+Remotion Logic",
+      "path": ".",
+      "purpose": "Sincronização entre animações em tempo real e captura offline",
+      "primary_files": [
+        ".agents/skills/aura-remotion-gsap/SKILL.md",
+        "cachorrinho.html"
+      ],
+      "functions": [],
+      "entities": [],
+      "business_rules": [
+        {
+          "description": "GSAP timeline deve sempre ser iniciada pausada.",
+          "location": ".agents/skills/aura-remotion-gsap/SKILL.md",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Sincronizar a animação usando tl.seek(frame / fps).",
+          "location": ".agents/skills/aura-remotion-gsap/SKILL.md",
+          "confidence": "confirmed"
+        }
+      ],
+      "dependencies": [],
+      "algorithms": [
+        {
+          "description": "Sincronização por quadro (Time Trick)",
+          "confidence": "confirmed"
+        }
+      ],
+      "complexity": "high"
+    }
+  ]
+}

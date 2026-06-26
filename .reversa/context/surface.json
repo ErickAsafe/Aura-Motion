@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-06-26T00:59:00Z",
+  "project_root": "c:/Users/erick/Desktop/Aura Motion",
+  "languages": [
+    { "name": "HTML", "extensions": [".html"], "file_count": 2 },
+    { "name": "Markdown", "extensions": [".md"], "file_count": 5 }
+  ],
+  "primary_language": "Markdown",
+  "frameworks": [],
+  "package_manager": "None",
+  "entry_points": [
+    { "path": "docs/index.html", "type": "app_entry" }
+  ],
+  "config_files": [
+    ".reversa/config.toml"
+  ],
+  "ci_cd": [],
+  "modules": [
+    "docs", "agents"
+  ],
+  "total_files": 12,
+  "organization_suggestion": {
+    "granularity": "feature",
+    "rationale": "Não há código backend ou roteamento, o projeto é um framework baseado em artefatos de IA.",
+    "signals": [],
+    "features": ["Documentation", "AI Agents Pipeline", "GSAP+Remotion Logic"]
+  }
+}

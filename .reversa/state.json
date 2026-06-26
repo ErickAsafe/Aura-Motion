@@ -5,18 +5,17 @@
   "chat_language": "pt-br",
   "doc_language": "Português",
   "answer_mode": "chat",
-  "doc_level": "completo",
+  "doc_level": "detalhado",
   "output_folder": "_reversa_sdd",
   "forward_folder": "_reversa_forward",
-  "phase": null,
-  "completed": [],
-  "pending": [
+  "phase": "revisao",
+  "completed": [
     "reconhecimento",
     "escavacao",
     "interpretacao",
-    "geracao",
-    "revisao"
+    "geracao"
   ],
+  "pending": [],
   "checkpoints": {},
   "engines": [
     "claude-code",
@@ -183,9 +182,9 @@
     ".reversa\\setup.json",
     ".reversa\\state.json",
     ".reversa\\config.toml",
-    ".reversa\\config.user.toml",
-    ".reversa\\plan.md",
-    ".reversa\\version",
-    ".reversa\\_config\\manifest.yaml"
-  ]
+  "plan.md",
+    "version",
+    "_config\\manifest.yaml"
+  ],
+  "redator_progress": "todas as units e globais concluídas"
 }
